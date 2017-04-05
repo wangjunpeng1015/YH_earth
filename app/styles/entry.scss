@@ -1,0 +1,21 @@
+/* 第三方依赖样式库 或者 对第三方样式的hack */
+@import 'bower_components/angular-material/angular-material.scss';
+@import 'compat/zTreeStyle.scss';
+@import 'compat/animate.scss';
+@import 'compat/material-hack.scss';
+@import 'compat/jquery-ui.scss';
+/* 我们的样式代码 */
+@import 'reset';
+@import 'lw_shared';
+@import 'layout';
+@import 'navigator';
+@import 'components/dragableTree';
+@import 'toolbar';
+@import 'FasterView/taskView';
+@import 'FasterView/commandView';
+
+/* modules */
+@import 'modules/taskBreakDown';
+@import 'modules/taskDistribute';
+
+

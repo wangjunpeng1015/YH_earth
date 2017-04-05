@@ -1,0 +1,35 @@
+.app-container {
+    height: 100%;
+    width: 100%;
+}
+.content-container {
+    overflow: auto;
+}
+
+// 每一个路由页面的通用布局样式
+.appStateContainer {
+	height: 100%;
+
+	&_leftSideBar {
+		height: 100%;
+		width: 300px;
+	}
+
+	&_body {
+		height: 100%;
+		overflow: auto;
+	}
+
+	&_rightSideBar {
+		height: 100%;
+		width: 300px;
+	}
+
+	md-tabs {
+		height: 100%;
+
+		[md-tabs-template] {
+			height: 100%;
+		}
+	}
+}

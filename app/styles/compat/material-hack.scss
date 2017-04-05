@@ -1,0 +1,20 @@
+// 对material-ui的全局hack样式
+md-tabs {
+    background-color: #fff;
+}
+
+md-input-container md-datepicker {
+    width: 100%;
+
+    .md-datepicker-input-container {
+        width: 100%;
+
+        .md-datepicker-input {
+            max-width: none;
+        }
+    }
+}
+
+.md-datepicker-open .md-datepicker-input-container input.md-input {
+    border-color: rgba(0,0,0,0.12);
+}

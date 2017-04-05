@@ -1,0 +1,15 @@
+md-autocomplete(flex required
+	ng-disabled="editStatus"
+	md-input-name="searhText"
+	md-no-cache="true"
+	md-selected-item="ctrl.selectedItem"
+	md-search-text="ctrl.searhText"
+	md-items="item in ctrl.querySearch(ctrl.searhText)"
+	md-selected-item-change="onSelectedItemChange(ctrl.selectedItem);"
+	md-search-text-change="onSearchTextChange(ctrl.searchText);"
+	md-item-text="item.display"
+	md-require-match="true"
+	md-floating-label="{{labelName}}")
+	md-item-template
+		span(md-highlight-text="ctrl.searhText") {{item.display}}
+

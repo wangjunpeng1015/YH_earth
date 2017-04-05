@@ -1,0 +1,244 @@
+.appStateContainer.taskDistribute.animated.fadeIn(layout="row")
+	.appStateContainer_leftSideBar(layout="column" md-whiteframe="4")
+		.nb-header-tool
+			h3 任务方案查询
+		div.container-left-inner
+			h3.nb-subheader 查询条件
+			form
+				.plan-filter-wrapper(layout="row")
+					//- md-input-container
+					//- 	md-select(ng-model="eachTaskName" placeholder="请选择" ng-change="ctrl.buttonIsDisable()")
+					//- 		md-option(ng-value="eachTaskName" ng-repeat="eachTaskName in taskNames") {{eachTaskName.name}}
+					md-input-container(flex)
+						input(
+							ng-model="searchValue"
+							ng-change="ctrl.searchTask()"
+							ng-model-options="{ debounce: 500 }"
+							)
+
+		div.container-left-inner-bottom(flex)
+				ztree(nodes="zNodeData" click-fun="ctrl.getChooseNodeData(treeNode)" check-nodes="checkNodesData" choose-node="chooseNodeData" tree-id="leftTree")
+				p
+					md-button.md-raised.md-primary(
+						nb-dialog
+						template-url="/partials/taskAnalysis/newTaskDistributePlan.html"
+					) 增 加
+					md-button.md-raised.md-warn 删 除
+
+	.appStateContainer_body(flex layout="column")
+		.container-body-top
+			.nb-header-tool
+				h3 分配方案管理
+				span(flex)
+				md-button.md-primary.md-raised(
+					ng-click="editing=false;ctrl.save()"
+					ng-show="editing"
+					ng-disabled="!searchForm.$valid"
+					) 保 存
+				md-button.md-primary.md-raised(
+					ng-click="editing=true"
+					ng-hide="editing"
+					) 编 辑
+
+			form.nb-form(ng-submit="$event.preventDefault()" name="searchForm")
+				div(layout="row")
+					md-input-container(flex)
+						label 分配方案名称：
+						input(ng-disabled="!editing" ng-model="currentTaskPlan.name" name="name")
+					md-input-container(flex)
+						label 权限：
+						md-select(ng-model="currentTaskPlan.root" ng-disabled="!editing" name="root")
+							md-option(ng-repeat="option in roots" value="{{option.id}}") {{option.name}}
+					md-input-container(flex)
+						label 密级：
+						md-select(ng-model="currentTaskPlan.level" ng-disabled="!editing" name="level")
+							md-option(ng-repeat="option in levels" value="{{option.id}}") {{option.name}}
+				div(layout="row")
+					md-autocomplete(flex required
+						ng-disabled="!editing"
+						md-input-name="task"
+						md-input-minlength="2"
+						md-input-maxlength="18"
+						md-no-cache="ctrl.noCache"
+						md-selected-item="currentTaskPlan.selectedTask"
+						md-search-text="currentTaskPlan.task"
+						md-items="item in ctrl.querySearch(currentTaskPlan.task,ctrl.tasks)"
+						md-item-text="item.display"
+						md-require-match="true"
+						md-floating-label="所属任务"
+						placeholder="请输入所属任务")
+						md-item-template
+							span(md-highlight-text="ctrl.searchText") {{item.display}}
+						div(ng-messages="searchForm.task.$error" ng-if="searchForm.task.$touched")
+							div(ng-message="required") 所属任务不能为空
+							div(ng-message="md-require-match") 请输入已有任务
+							div(ng-message="minlength") 你输入的字数长度不够
+							div(ng-message="maxlength") 你输入的字数过长
+					md-autocomplete(flex required
+						ng-disabled="!editing"
+						md-input-name="scheme"
+						md-input-minlength="2"
+						md-input-maxlength="18"
+						md-no-cache="ctrl.noCache"
+						md-selected-item="currentTaskPlan.selectedSchemes"
+						md-search-text="currentTaskPlan.scheme"
+						md-items="item in ctrl.querySearch(currentTaskPlan.scheme,ctrl.schemes)"
+						md-item-text="item.display"
+						md-require-match="true"
+						md-floating-label="所属任务方案")
+						md-item-template
+							span(md-highlight-text="ctrl.searchText") {{item.display}}
+						div(ng-messages="searchForm.scheme.$error" ng-if="searchForm.scheme.$touched")
+							div(ng-message="required") 所属任务方案不能为空
+							div(ng-message="md-require-match") 请输入已有方案
+							div(ng-message="minlength") 你输入的字数长度不够
+							div(ng-message="maxlength") 你输入的字数过长
+					md-autocomplete(flex required
+						ng-disabled="!editing"
+						md-input-name="alocationScheme"
+						md-input-minlength="2"
+						md-input-maxlength="18"
+						md-no-cache="ctrl.noCache"
+						md-selected-item="currentTaskPlan.selectedAlocationSchemes"
+						md-search-text="currentTaskPlan.alocationScheme"
+						md-items="item in ctrl.querySearch(currentTaskPlan.alocationScheme,ctrl.alocationSchemes)"
+						md-item-text="item.display"
+						md-require-match="true"
+						md-floating-label="所属任务分配方案")
+						md-item-template
+							span(md-highlight-text="ctrl.searchText") {{item.display}}
+						div(ng-messages="searchForm.alocationScheme.$error" ng-if="searchForm.alocationScheme.$touched")
+							div(ng-message="required") 所属任务分配方案不能为空
+							div(ng-message="md-require-match") 请输入已有分配方案
+							div(ng-message="minlength") 你输入的字数长度不够
+							div(ng-message="maxlength") 你输入的字数过长
+				div(layout="row")
+					md-input-container(flex)
+						label 拟制人：
+						input(name="creatPeople" ng-disabled="!editing" ng-model="currentTaskPlan.creatPeople")
+					md-autocomplete(flex required
+						ng-disabled="!editing"
+						md-input-name="organization"
+						md-input-minlength="2"
+						md-input-maxlength="18"
+						md-no-cache="ctrl.noCache"
+						md-selected-item="currentTaskPlan.selectedOrganizations"
+						md-search-text="currentTaskPlan.organization"
+						md-items="item in ctrl.querySearch(currentTaskPlan.organization,ctrl.organizations)"
+						md-item-text="item.display"
+						md-require-match="true"
+						md-floating-label="拟制单位")
+						md-item-template
+							span(md-highlight-text="ctrl.searchText") {{item.display}}
+						div(ng-messages="searchForm.organization.$error" ng-if="searchForm.organization.$touched")
+							div(ng-message="required") 拟制单位不能为空
+							div(ng-message="md-require-match") 请输入已有分配方案
+							div(ng-message="minlength") 你输入的字数长度不够
+							div(ng-message="maxlength") 你输入的字数过长
+					div(flex)
+				div(layout="row")
+					md-input-container.container-top-inner-last(flex)
+						label 简述：
+						input(name="description" ng-disabled="!editing" ng-model="currentTaskPlan.description")
+		.container-body-bottom(flex layout="column")
+			.nb-header-tool
+				h3 任务分配方案视图
+				span(flex)
+				md-button.md-primary.md-raised(
+					ng-click=""
+				) 保 存
+
+			.container-body-bottom-content(layout="row" flex)
+				div.container-body-bottom-left
+					h3.nb-subheader 分配方式选择
+					.nb-piano.tree-trunk
+						.nb-piano_item(
+							ng-click="actived = 0"
+							ng-class="{'actived': actived == 0}"
+							)
+							md-button.nb-piano_item_title.md-primary.md-raised 侦查方向
+
+							.nb-piano_item_list(
+								layout="column"
+								)
+								md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) 对美侦查
+								md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) 对印侦查
+								md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) 对日侦查
+
+						.nb-piano_item(
+							ng-click="actived = 1"
+							ng-class="{'actived': actived == 1}"
+							)
+							md-button.nb-piano_item_title.md-primary.md-raised 侦查样式
+
+							.nb-piano_item_list(
+								layout="column"
+								)
+								md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) 对目标侦查
+								md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) 对基础数据侦查
+								md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) 对敌方单位侦查
+
+						.nb-piano_item(
+							ng-click="actived = 2"
+							ng-class="{'actived': actived == 2}"
+							)
+							md-button.nb-piano_item_title.md-primary.md-raised 目标类别
+
+							.nb-piano_item_list(
+								layout="column"
+								)
+								md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) 空军
+								md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) 陆军
+								md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) 海军
+
+				div.container-body-bottom-middle(flex)
+					dragable-tree.dragable-tree(tree-data="treeData" trunk="tree-trunk" leaf="tree-leaf")
+
+				div.container-body-bottom-right
+					//- .nb-header-tool
+					//- 	h3 部队选择
+					div(layout="row")
+						md-button.md-primary.md-raised(flex) 南部基地
+						md-button.md-primary.md-raised(flex) 北部基地
+					div(layout="row")
+						md-button.md-primary.md-raised(flex) 东部基地
+						md-button.md-primary.md-raised(flex) 西部基地
+					div(layout="row")
+						md-button.md-primary.md-raised(flex) 中部基地
+						md-button.md-primary.md-raised(flex) 更多基地
+					div.container-left-inner
+						h3.nb-subheader 查询条件
+						form
+							.plan-filter-wrapper(layout="column")
+								md-input-container
+									input(
+										ng-model="searchValue"
+										ng-change="ctrl.searchTask()"
+										ng-model-options="{ debounce: 500 }"
+										)
+								//- ztree(nodes="rightNodeData" click-fun="ctrl.getChooseNodeData(treeNode)" check-nodes="checkNodesData" choose-node="chooseNodeData" tree-id="rightTree")
+
+						.nb-piano(style="padding: 0 20px").tree-leaf
+							.nb-piano_item(
+								ng-click="acted = 4"
+								ng-class="{'acted': acted == 4}"
+								)
+								md-button.nb-piano_item_title.md-primary.md-raised XXX侦察旅
+								.nb-piano_item_list(
+									layout="column"
+									)
+									md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) XX1处
+									md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) XX2处
+									md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) XX3处
+						.nb-piano(style="padding: 0 20px").tree-leaf
+							.nb-piano_item(
+								ng-click="acted = 5"
+								ng-class="{'acted': acted == 5}"
+								)
+								md-button.nb-piano_item_title.md-primary.md-raised YYY侦察旅
+								.nb-piano_item_list(
+									layout="column"
+									)
+									md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) YY1处
+									md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) YY2处
+									md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target) YY3处

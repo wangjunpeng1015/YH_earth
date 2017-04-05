@@ -1,0 +1,106 @@
+md-dialog
+    md-toolbar
+        .md-toolbar-tools
+            h3 新建任务分配方案
+    form(ng-submit="$event.preventDefault()" name="newDistributePlanForm")
+        md-dialog-content
+            .md-dialog-content
+                div(layout="row")
+                    md-input-container(flex required)
+                        label 分解方案名称：
+                        input(ng-model="addTaskPlan.name")
+                    md-input-container(flex)
+                        label 权限：
+                        md-select(ng-model="addTaskPlan.root")
+                            md-option(ng-repeat="option in roots" value="{{option.id}}") {{option.name}}
+                    md-input-container(flex)
+                        label 密级：
+                        md-select(ng-model="addTaskPlan.level")
+                            md-option(ng-repeat="option in levels" value="{{option.id}}") {{option.name}}
+                div(layout="row")
+                    md-autocomplete(flex required
+                        md-input-name="task"
+                        md-input-minlength="2"
+                        md-input-maxlength="18"
+                        md-no-cache="ctrl.noCache"
+                        md-selected-item="addTaskPlan.selectedTask"
+                        md-search-text="addTaskPlan.task"
+                        md-items="item in ctrl.querySearch(addTaskPlan.task,ctrl.tasks)"
+                        md-item-text="item.display"
+                        md-require-match="true"
+                        md-floating-label="所属任务")
+                        md-item-template
+                            span(md-highlight-text="ctrl.searchText") {{item.display}}
+                        div(ng-messages="newDistributePlanForm.task.$error" ng-if="newDistributePlanForm.task.$touched")
+                            div(ng-message="required") 所属任务不能为空
+                            div(ng-message="md-require-match") 请输入已有任务
+                            div(ng-message="minlength") 你输入的字数长度不够
+                            div(ng-message="maxlength") 你输入的字数过长
+                    md-autocomplete(flex required
+                        md-input-name="scheme"
+                        md-input-minlength="2"
+                        md-input-maxlength="18"
+                        md-no-cache="ctrl.noCache"
+                        md-selected-item="addTaskPlan.selectedSchemes"
+                        md-search-text="addTaskPlan.scheme"
+                        md-items="item in ctrl.querySearch(addTaskPlan.scheme,ctrl.schemes)"
+                        md-item-text="item.display"
+                        md-require-match="true"
+                        md-floating-label="所属任务方案")
+                        md-item-template
+                            span(md-highlight-text="ctrl.searchText") {{item.display}}
+                        div(ng-messages="newDistributePlanForm.scheme.$error" ng-if="newDistributePlanForm.scheme.$touched")
+                            div(ng-message="required") 所属方案不能为空
+                            div(ng-message="md-require-match") 请输入已有方案
+                            div(ng-message="minlength") 你输入的字数长度不够
+                            div(ng-message="maxlength") 你输入的字数过长
+                    md-autocomplete(flex required
+                        md-input-name="alocationScheme"
+                        md-input-minlength="2"
+                        md-input-maxlength="18"
+                        md-no-cache="ctrl.noCache"
+                        md-selected-item="addTaskPlan.selectedAlocationSchemes"
+                        md-search-text="addTaskPlan.alocationScheme"
+                        md-items="item in ctrl.querySearch(addTaskPlan.alocationScheme,ctrl.alocationSchemes)"
+                        md-item-text="item.display"
+                        md-require-match="true"
+                        md-floating-label="所属任务分配方案")
+                        md-item-template
+                            span(md-highlight-text="ctrl.searchText") {{item.display}}
+                        div(ng-messages="newDistributePlanForm.alocationScheme.$error" ng-if="newDistributePlanForm.alocationScheme.$touched")
+                            div(ng-message="required") 所属分配方案不能为空
+                            div(ng-message="md-require-match") 请输入已有分配方案
+                            div(ng-message="minlength") 你输入的字数长度不够
+                            div(ng-message="maxlength") 你输入的字数过长
+                div(layout="row")
+                    md-input-container(flex)
+                        label 拟制人：
+                        input(name="createPeople" ng-model="addTaskPlan.createPeople")
+                    md-autocomplete(flex required
+                        md-input-name="organization"
+                        md-input-minlength="2"
+                        md-input-maxlength="18"
+                        md-no-cache="ctrl.noCache"
+                        md-selected-item="addTaskPlan.selectedOrganizations"
+                        md-search-text="addTaskPlan.organization"
+                        md-items="item in ctrl.querySearch(addTaskPlan.organization,ctrl.organizations)"
+                        md-item-text="item.display"
+                        md-require-match="true"
+                        md-floating-label="拟制单位")
+                        md-item-template
+                            span(md-highlight-text="ctrl.searchText") {{item.display}}
+                        div(ng-messages="newDistributePlanForm.organization.$error" ng-if="newDistributePlanForm.organization.$touched")
+                            div(ng-message="required") 拟制单位不能为空
+                            div(ng-message="md-require-match") 请输入已有分配方案
+                            div(ng-message="minlength") 你输入的字数长度不够
+                            div(ng-message="maxlength") 你输入的字数过长
+                    div(flex)
+                div(layout="row")
+                    md-input-container.container-top-inner-last(flex)
+                        label 简述：
+                        input(ng-model="addTaskPlan.description")
+
+        md-dialog-actions
+            md-button.md-primary.md-raised(ng-click="ctrl.addSave(); dialog.close()" ng-disabled="!newDistributePlanForm.$valid") 提 交
+            md-button.md-raised(ng-click="dialog.close()") 取 消
+

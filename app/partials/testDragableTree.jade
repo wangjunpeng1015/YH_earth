@@ -1,0 +1,10 @@
+div.tree-wrapper(layout="row")
+    div
+        md-button.md-raised.md-warn(ng-click="ctrl.clickHandler()") 修改数据
+
+    dragable-tree.dragable-tree(style="width: 1000px; height: 300px;" tree-data="treeData" class-name-of-new="plan1")
+
+    div
+        md-button.md-raised.md-primary.plan1 方案一
+        md-button.md-raised.md-primary.plan1 方案二
+        md-button.md-raised.md-primary.plan1 方案三

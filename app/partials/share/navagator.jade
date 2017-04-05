@@ -1,0 +1,63 @@
+//- 这里是导航
+
+//-一级菜单
+div.first-navbar-wrap
+	div.first-navbar.bounceInLeft.animated
+		button.first-navbars(
+			ng-click="isShow1=true; isShow2=false; isShow3=false;"
+			ng-class="{'active': isShow1}"
+			) 技侦筹划
+		button.second-navbars(
+			ng-click="isShow1=false; isShow2=true; isShow3=false;"
+			ng-class="{'active': isShow2}"
+			) 行动控制
+		button.third-navbars(
+			ng-click="isShow1=false; isShow2=false; isShow3=true;"
+			ng-class="{'active': isShow3}"
+			) 评估总结
+//-二级菜单
+div.second-navbar-wrap(md-whiteframe="3")
+	div.first-navbars(ng-show="isShow1" ng-class="{true:'bounceInLeft animated',false:''}[isShow1]")
+		md-button.navbars 方案管理
+			div.button-inner-div
+				div.button-inner-child-div(ui-sref='FasterEntry') 任务视图
+		md-button.navbars 任务管理
+			div.button-inner-div
+				div.button-inner-child-div(ui-sref="taskReceive") 任务受领
+		md-button.navbars 作业管理
+		md-button.navbars 任务分析
+			div.button-inner-div
+				div.button-inner-child-div(ui-sref="taskDistribute") 任务分配
+				div.button-inner-child-div(ui-sref="taskBreakDown") 任务分解
+		md-button.navbars 方案定制
+		md-button.navbars 预演评估
+
+	div.first-navbars(ng-show="isShow2" ng-class="{true:'bounceInLeft animated',false:''}[isShow2]")
+		md-button.navbars 方案管理
+			div.button-inner-div
+				div.button-inner-child-div(ui-sref='FasterEntry') 任务视图
+		md-button.navbars 任务管理
+			div.button-inner-div
+				div.button-inner-child-div(ui-sref="taskReceive") 任务受领
+		md-button.navbars 作业管理
+		md-button.navbars 任务分析
+			div.button-inner-div
+				div.button-inner-child-div(ui-sref="taskDistribute") 任务分配
+				div.button-inner-child-div(ui-sref="taskBreakDown") 任务分解
+		md-button.navbars 方案定制
+		md-button.navbars 预演评估
+
+	div.first-navbars(ng-show="isShow3" ng-class="{true:'bounceInLeft animated',false:''}[isShow3]")
+		md-button.navbars 方案管理
+			div.button-inner-div
+				div.button-inner-child-div(ui-sref='FasterEntry') 任务视图
+		md-button.navbars 任务管理
+			div.button-inner-div
+				div.button-inner-child-div(ui-sref="taskReceive") 任务受领
+		md-button.navbars 作业管理
+		md-button.navbars 任务分析
+			div.button-inner-div
+				div.button-inner-child-div(ui-sref="taskDistribute") 任务分配
+				div.button-inner-child-div(ui-sref="taskBreakDown") 任务分解
+		md-button.navbars 方案定制
+		md-button.navbars 预演评估

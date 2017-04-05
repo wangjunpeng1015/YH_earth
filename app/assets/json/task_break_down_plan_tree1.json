@@ -1,0 +1,31 @@
+{
+    "name": "根节点",
+    "type": "root",
+    "children": [{
+        "name": "枝干节点",
+        "type": "trunk",
+        "dataType": "string",
+        "children": [{
+            "name": "叶子",
+            "type": "leaf",
+            "dataType": "string"
+        }]
+    }, {
+        "name": "枝干节点",
+        "type": "trunk",
+        "dataType": "string",
+        "children": [{
+            "name": "2017-10-10",
+            "type": "leaf",
+            "dataType": "date"
+        }]
+    }, {
+        "name": "枝干节点",
+        "type": "trunk",
+        "dataType": "string"
+    }, {
+        "name": "枝干节点",
+        "type": "trunk",
+        "dataType": "string"
+    }]
+}

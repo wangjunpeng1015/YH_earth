@@ -1,0 +1,76 @@
+.appStateContainer.taskDistribute{
+	background-color: #fff;
+	.line-height-fit{
+		line-height: 28px;
+	}
+	md-input-container{
+		margin: 0;
+	}
+	p{
+		margin: 0;
+	}
+	.task-search-form{
+		margin: 0 10px;
+	}
+	.ztree{
+		padding: 10px;
+	}
+	#leftTree{
+		span.ico_close, span.ico_open, span.ico_docu{
+			display: none;
+		}
+	}
+
+}
+
+.taskDistribute .plan-filter-wrapper {
+	padding: 0 20px;
+
+	md-input-container {
+		padding-bottom: 0;
+		margin: 0;
+	}
+}
+
+.taskDistribute .container-body-top form{
+	margin: 0 10px;
+	& md-input-container{
+		& label, & select, & input{
+			// color: #333;
+		}
+	}
+}
+
+.taskDistribute .container-body-bottom{
+	.container-body-bottom-left {
+		border-right: 1px solid $text-hint;
+		overflow-y: auto;
+		width: 200px;
+		padding: 0 20px;
+
+		.nb-subheader {
+			margin-bottom: 10px;
+			margin-left: 0;
+		}
+	}
+
+	.container-body-bottom-right{
+		background-color: #fff;
+		border-left: 1px solid $text-hint;
+		overflow-y: auto;
+		#rightTree{
+			span.ico_close, span.ico_open, span.ico_docu{
+				display: none;
+			}
+			& > li > a, & > li > ul > li > a{
+				border: 1px solid green;
+				&:hover{
+					text-decoration: none;
+				}
+			}
+			& > li > ul > li > a{
+				border: 1px solid red;
+			}
+		}
+	}
+}

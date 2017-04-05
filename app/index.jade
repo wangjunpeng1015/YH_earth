@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        title 技术侦查指挥信息系统
+        link(rel="stylesheet", href="styles/entry.css")
+
+    body
+        div.app-container(ng-app="nb" layout="column" ng-cloak)
+            .nb-toolbar
+                include partials/share/toolbar
+
+            ui-view.content-container(flex)
+
+            .nb-nav(ng-controller="navController as navCtrl")
+                include partials/share/navagator
+
+        script(src="js/libs.js")
+        script(src="js/app.js")
+

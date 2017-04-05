@@ -1,0 +1,53 @@
+.task-view(layout="row" ng-controller="CommandViewCtrl as ctrl")
+	.appStateContainer_leftSideBar(layout="column" md-whiteframe="4")
+		.nb-header-tool
+			h3 方案列表
+		div.container-left-inner
+			h3.nb-subheader 查询条件
+			form(ng-submit="$event.preventDefault()" name="searchForm")
+				.plan-filter-wrapper(layout)
+					md-input-container
+						md-select(ng-model="planQueryType")
+							//- md-option(ng-repeat="option in planQueryTypes" value="{{option.id}}") {{option.name}}
+					md-input-container(flex)
+						input(
+							ng-model="planQueryText"
+							ng-model-options="{ debounce: 500 }"
+							ng-change=""
+							)
+
+		div.container-left-inner-bottom(flex)
+			ztree(tree-id="command-view-1" nodes="tasksTreeData" click-fun="ctrl.getCurrentTaskPlanTreeData(treeNode)" choose-node="chooseNode" chkstyle="checkbox" check-nodes="checkNodes")
+			p
+				md-button.md-warn.md-raised(ng-click="deleteScheme()") 删 除
+
+	.appStateContainer_body(flex layout="column")
+		.container-body-bottom(flex layout="column")
+			.nb-header-tool
+				h3 指挥视图
+				span(flex)
+				md-button.md-primary.md-raised(
+					ng-click="ctrl.saveCurrentTaskPlanTreeData(currentTaskPlan);"
+				) 保 存
+
+			.container-body-bottom-content(layout="row" flex)
+				.container-body-bottom-middle(flex)
+					dragable-tree.dragable-tree(tree-data="treeData" trunk="tree-trunk" leaf="tree-leaf")
+				.container-body-bottom-right(layout="column")
+					h3.nb-subheader.ml0 任务工具
+					div(layout)
+						md-input-container(flex)
+							label 目标搜索
+							input(type="text")
+					.nb-piano.tree-trunk
+						.nb-piano_item(
+							ng-click="actived = 0"
+							ng-class="{'actived': actived == 0}"
+							)
+							md-button.nb-piano_item_title.md-primary.md-raised 方向侦查类型
+
+							.nb-piano_item_list(
+								layout="column"
+								)
+								md-button.nb-piano_item_list_item.md-primary.md-raised.md-hue-2(target ng-repeat="trunk in trunks") {{trunk.name}}
+

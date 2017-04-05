@@ -1,0 +1,35 @@
+.appStateContainer.task-receive.animated.fadeIn
+	md-card
+		.nb-header-tool
+			h3 任务受领
+		form.nb-form(ng-submit="ctrl.createTask(newTask);" name="newTaskForm")
+			div(layout="row")
+				md-input-container(flex)
+					md-select(ng-model="newTask.parentDep" placeholder="上级单位：" required)
+						md-option(value="21") first
+						md-option(value="22") second
+				md-input-container(flex)
+					label 接受时间
+					md-datepicker(required ng-model="newTask.receivedAt" md-hide-icons="calendar")
+				md-input-container(flex)
+					md-select(ng-model="c" placeholder="侦察对象：" required)
+						md-option(value="31") first
+						md-option(value="32") second
+				md-input-container(flex)
+					label 侦察区域
+					input(required)
+			div(layout="row")
+				md-input-container(flex)
+					label 任务部队
+					input
+				md-input-container(flex)
+					md-select(ng-model="c" placeholder="分发单位：")
+						md-option(value="31") first
+						md-option(value="32") second
+			div(layout="row")
+				md-input-container.container-top-inner-last(flex)
+					label 任务要求
+					input
+			div()
+				md-button.md-primary.md-raised(type="submit") 保 存
+				md-button.md-accent.md-raised(type="reset" ng-click="newTask = {}") 清 空

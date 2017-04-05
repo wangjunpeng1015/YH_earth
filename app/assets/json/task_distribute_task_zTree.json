@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1, "name": "XX侦查任务", "open": true, "children":
+        [
+            {
+                "id": 11, "name": "分配方案一"
+            },
+            {
+                "id": 11, "name": "分配方案二"
+            }
+        ] 
+       
+    },
+    {
+        "id": 2, "name": "YY侦查任务", "children":
+        [
+            {
+                "id": 21, "name": "分配方案一"
+            },
+            {
+                "id": 21, "name": "分配方案二"
+            },
+            {
+                "id": 23, "name": "分配方案三"
+            }
+        ] 
+       
+    },
+    {
+        "id": 3, "name": "ZZ侦查任务", "children":
+        [
+            {
+                "id": 31, "name": "分配方案一"
+            },
+            {
+                "id": 31, "name": "分配方案二"
+            }
+        ] 
+       
+    },
+    {
+        "id": 4, "name": "53465任务", "children":
+        [
+            {
+                "id": 65654, "name": "6546456546"
+            },
+            {
+                "id": 65665, "name": "6546456546456"
+            }
+        ] 
+       
+    },
+    {
+        "id": 5, "name": "gfrfghfghgfh", "children":
+        [
+            {
+                "id": 4546, "name": "hfgghfhghfg"
+            },
+            {
+                "id": 65464564, "name": "gfhfghfghhfg"
+            }
+        ] 
+       
+    },
+    {
+        "id": 6, "name": "jhhjkhjkhjhkjh", "children":
+        [
+            {
+                "id": 546546, "name": "fbgg"
+            },
+            {
+                "id": 54355, "name": "gfg"
+            },
+            {
+                "id": 534543534, "name": "54353"
+            },
+            {
+                "id": 534645676, "name": "54354"
+            },
+            {
+                "id": 9879780886755, "name": "gdf34534gdfgfg"
+            }
+        ] 
+       
+    }
+]
